@@ -192,23 +192,25 @@ color: black;
 
 .box .form {
     display: flex;
-    justify-content: center;
-    margin: auto;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 0.2rem;
+    flex-direction: column;
 }
 
 .box .form .buttons {
     margin-top: 1rem;
     display: flex;
-    justify-content: space-around;
-    grid-column: 1 / span 3;
+    flex-wrap: wrap;
+    
 
+}
+
+.box .form .input-labels {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .box .form .input-box {
     display: flex;
+    max-width: fit-content;
     justify-content: center;
     padding-bottom: 0.8rem;
     width: 100%;
@@ -221,6 +223,7 @@ color: black;
     border: 0.1rem solid gainsboro;
     border-radius: 5px;
     font-size: medium;
+    
 }
 
 .box .form .input-box input:focus {
@@ -232,10 +235,10 @@ color: black;
 }
 
 .box .form .input-button input {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     border: none;
     outline: none;
-    border-radius: 5px;
+    border-radius: 0.3rem;
     padding: 0.6rem 2rem;
     background-color: rgb(212, 25, 63);
     color: white;
@@ -247,4 +250,8 @@ color: black;
     background-color: rgb(233, 24, 66);
     box-shadow: 2px rgb(70, 27, 36);
 
+}
+
+.box .form .input-button input:active {
+    background-color: rgb(37, 37, 43);
 }

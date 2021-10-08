@@ -42,13 +42,12 @@ button {
 
 #bootstrap-overrides .navigation-bar__logo h5,
 span {
-    font-family: "Monserrat",
-        sans-serif;
+    font-family: "Monserrat", sans-serif;
     font-weight: 600;
     font-size: 1.2rem;
     padding: 0 0.2rem;
     margin: 0;
-    line-height: 0;
+   
 }
 
 #bootstrap-overrides .navigation-bar__logo:hover {
