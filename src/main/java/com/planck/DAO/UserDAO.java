@@ -9,7 +9,7 @@ public class UserDAO {
     Connection connection = new Connection();
 
     public void createUser(long userIdCard, String userEmail, String userName, String password, String user) {
-        String query = "INSERT INTO users (userIdCard, userEmail, userName, password, user) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO usuarios (cedula_usuario, email_usuario, nombre_usuario, password, usuario) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setLong(1, userIdCard);
@@ -26,7 +26,7 @@ public class UserDAO {
     }
 
     public void createUser(User user) {
-        String query = "INSERT INTO users (userIdCard, userEmail, userName, password, user) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO usuarios (cedula_usuario, email_usuario, nombre_usuario, password, usuario) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setLong(1, user.getUserIdCard());
@@ -46,14 +46,14 @@ public class UserDAO {
 
         ArrayList<User> users = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.getConnection().prepareStatement("SELECT * FROM users");
+            PreparedStatement statement = connection.getConnection().prepareStatement("SELECT * FROM usuarios");
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                long userIdCard = result.getLong("userIdCard");
-                String userEmail = result.getString("userEmail");
-                String userName = result.getString("userName");
+                long userIdCard = result.getLong("cedula_usuario");
+                String userEmail = result.getString("email_usuario");
+                String userName = result.getString("nombre_usuario");
                 String password = result.getString("password");
-                String user = result.getString("user");
+                String user = result.getString("usuario");
                 users.add(new User(userIdCard, userEmail, userName, password, user));
             }
             result.close();
@@ -67,17 +67,17 @@ public class UserDAO {
     }
 
     public User searchUser(String parameterName, String parameter) {
-        String query = "SELECT * FROM users WHERE " + parameterName + "=" + "'" + parameter + "'";
+        String query = "SELECT * FROM usuarios WHERE " + parameterName + "=" + "'" + parameter + "'";
         User response = null;
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                long userIdCard = result.getLong("userIdCard");
-                String userEmail = result.getString("userEmail");
-                String userName = result.getString("userName");
+                long userIdCard = result.getLong("cedula_usuario");
+                String userEmail = result.getString("email_usuario");
+                String userName = result.getString("nombre_usuario");
                 String password = result.getString("password");
-                String user = result.getString("user");
+                String user = result.getString("usuario");
                 response = new User(userIdCard, userEmail, userName, password, user);
             }
             result.close();
@@ -92,7 +92,7 @@ public class UserDAO {
     }
 
     public void updateUser(User user) {
-        String query = "UPDATE users SET userEmail=? , userName=? , password=? , user=? WHERE userIdCard=?";
+        String query = "UPDATE usuarios SET email_usuario=? , nombre_usuario=? , password=? , usuario=? WHERE cedula_usuario=?";
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setString(1, user.getUserEmail());
@@ -109,7 +109,7 @@ public class UserDAO {
     }
 
     public void deleteUser(User user) {
-        String query = "DELETE FROM users WHERE userIdCard=?";
+        String query = "DELETE FROM usuarios WHERE cedula_usuario=?";
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setLong(1, user.getUserIdCard());
@@ -122,7 +122,7 @@ public class UserDAO {
     }
 
     public void deleteUser(long userIdCard) {
-        String query = "DELETE FROM users WHERE userIdCard=?";
+        String query = "DELETE FROM usuarios WHERE cedula_usuario=?";
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setLong(1, userIdCard);

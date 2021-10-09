@@ -24,7 +24,7 @@ public class UserController {
 // Read = GET
     @GetMapping(value = "{userIdCard}")
     public User getUserById(@PathVariable("userIdCard") long userIdCard) {
-        return userDAO.searchUser("userIdCard", userIdCard+"");
+        return userDAO.searchUser("cedula_usuario", userIdCard + "");
     }
 
     @PutMapping("/update")

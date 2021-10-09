@@ -16,6 +16,9 @@ public class Product {
         this.purchasePrice = purchasePrice;
         this.salePrice = salePrice;
     }
+    public Product(){
+
+    }
 
     public long getProductId() {
         return productId;
