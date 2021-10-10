@@ -27,6 +27,12 @@ public class UserController {
         return userDAO.searchUser("cedula_usuario", userIdCard + "");
     }
 
+    @GetMapping("/user/{user}/{password}")
+    public String getUser(@PathVariable("user") String user, @PathVariable("password") String password) {
+        return userDAO.checkCredentials(user, password);
+    }
+
+
     @PutMapping("/update")
     public User updateUser(@RequestBody User user) {
         userDAO.updateUser(user);

@@ -269,6 +269,8 @@ function printOne(data){
   columna4.innerHTML = data.purchaseVAT;
   var columna5 = document.createElement("td");
   columna5.innerHTML = data.purchasePrice;
+  var columna6 = document.createElement("td");
+  columna6.innerHTML = data.salePrice;
   
 
   lista.appendChild(tr);
@@ -277,5 +279,6 @@ function printOne(data){
   tr.appendChild(columna3);
   tr.appendChild(columna4);
   tr.appendChild(columna5);
+  tr.appendChild(columna6);
 }
 

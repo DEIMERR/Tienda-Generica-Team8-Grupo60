@@ -90,6 +90,19 @@ public class UserDAO {
         return response;
 
     }
+// Checkear un usuario para iniciar sesion
+    public String checkCredentials(String user, String password){
+        User userToCheck = searchUser("usuario", user);
+        if (userToCheck != null){
+            if (userToCheck.getPassword().equals(password)){
+                return "CorrectCredentials";
+            }
+            else {
+                return "incorrectPassword";
+            }
+        }
+        return "incorrectName";
+    }
 
     public void updateUser(User user) {
         String query = "UPDATE usuarios SET email_usuario=? , nombre_usuario=? , password=? , usuario=? WHERE cedula_usuario=?";
