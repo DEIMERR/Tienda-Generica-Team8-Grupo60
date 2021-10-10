@@ -91,7 +91,7 @@ function addProducts(data){
   })
   setTimeout(() => {alert("¡Productos agregados exitosamente! <(￣︶￣)>")
   uploadText.innerHTML = "Seleccionar otro archivo"
-  }, 2000);
+  }, 3000);
   file.value = null;
 }
 
