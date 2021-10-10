@@ -103,12 +103,16 @@ table.dataTable td.sorting_1 {
 table.dataTable.no-footer {
     border-bottom: 0.1rem solid #CC1D4B !important;
 }
+
 table.dataTable>thead .sorting:before,
 .sorting:after {
-    bottom: .9em;
+    bottom: 50%;
+    transform: translateY(50%);
 }
+
 table.dataTable>thead .sorting:after {
-    bottom: .9em;
+    bottom: 50%;
+    transform: translateY(50%);
 }
 
 .styled-table tbody tr.active-row {

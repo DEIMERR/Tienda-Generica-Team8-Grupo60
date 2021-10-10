@@ -10,18 +10,28 @@ import java.util.ArrayList;
 
 public class ProductDAO {
 
+    public static final String SQL_PRODUCT_TABLE_NAME = "productos";
+    public static final String SQL_PRODUCT_ID = "codigo_producto";
+    public static final String SQL_PURCHASE_VAT = "ivaventa";
+    public static final String SQL_PROVIDER_NIT = "nitproveedor";
+    public static final String SQL_PRODUCT_NAME = "nombre_producto";
+    public static final String SQL_PURCHASE_PRICE = "precio_venta";
+    public static final String SQL_SALE_PRICE = "precio_venta";
+
     Connection connection = new Connection();
 
     public void createProduct(long productId, double purchaseVAT, long providerNit, String productName, double purchasePrice, double salePrice) {
-        String query = "INSERT INTO productos (codigo_producto, ivaventa, nitproveedor, nombre_producto, precio_compra, precio_venta) VALUES (?, ?, ?, ?, ?, ?)";
+        //String query = String.format("INSERT INTO productos (codigo_producto, ivaventa, nitproveedor, nombre_producto, precio_compra, precio_venta) VALUES (?, ?, ?, ?, ?, ?)");
+        String query = String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?)",
+                SQL_PRODUCT_TABLE_NAME, SQL_PRODUCT_ID, SQL_PURCHASE_VAT, SQL_PROVIDER_NIT, SQL_PRODUCT_NAME, SQL_PURCHASE_PRICE, SQL_SALE_PRICE);
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setLong(1, productId);
-            statement.setString(2, (purchaseVAT+""));
-            statement.setString(3, (providerNit+""));
+            statement.setDouble(2, purchaseVAT);
+            statement.setLong(3, providerNit);
             statement.setString(4, productName);
-            statement.setString(5, (purchasePrice+""));
-            statement.setString(6, (salePrice+""));
+            statement.setDouble(5, purchasePrice);
+            statement.setDouble(6, salePrice);
             statement.execute();
             statement.close();
         } catch (SQLException e) {
@@ -31,15 +41,16 @@ public class ProductDAO {
     }
 
     public void createProduct(Product product) {
-        String query = "INSERT INTO productos (codigo_producto, ivaventa, nitproveedor, nombre_producto, precio_compra, precio_venta) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?)",
+                SQL_PRODUCT_TABLE_NAME, SQL_PRODUCT_ID, SQL_PURCHASE_VAT, SQL_PROVIDER_NIT, SQL_PRODUCT_NAME, SQL_PURCHASE_PRICE, SQL_SALE_PRICE);
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setLong(1, product.getProductId());
-            statement.setString(2, (product.getPurchaseVAT()+""));
-            statement.setString(3, (product.getProviderNit()+""));
+            statement.setDouble(2, product.getPurchaseVAT());
+            statement.setLong(3, product.getProviderNit());
             statement.setString(4, product.getProductName());
-            statement.setString(5, (product.getPurchasePrice()+""));
-            statement.setString(6, (product.getSalePrice()+""));
+            statement.setDouble(5, product.getPurchasePrice());
+            statement.setDouble(6, product.getSalePrice());
             statement.execute();
             statement.close();
         } catch (SQLException e) {
@@ -52,15 +63,15 @@ public class ProductDAO {
 
         ArrayList<Product> products = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.getConnection().prepareStatement("SELECT * FROM productos");
+            PreparedStatement statement = connection.getConnection().prepareStatement("SELECT * FROM " + SQL_PRODUCT_TABLE_NAME);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                long productId = result.getLong("codigo_producto");
-                double purchaseVAT = result.getDouble("ivaventa");
-                long providerNit = result.getLong("nitproveedor");
-                String productName = result.getString("nombre_producto");
-                double purchasePrice = result.getDouble("precio_compra");
-                double salePrice = result.getDouble("precio_venta");
+                long productId = result.getLong(SQL_PRODUCT_ID);
+                double purchaseVAT = result.getDouble(SQL_PURCHASE_VAT);
+                long providerNit = result.getLong(SQL_PROVIDER_NIT);
+                String productName = result.getString(SQL_PRODUCT_NAME);
+                double purchasePrice = result.getDouble(SQL_PURCHASE_PRICE);
+                double salePrice = result.getDouble(SQL_SALE_PRICE);
                 products.add(new Product(productId, purchaseVAT, providerNit, productName, purchasePrice, salePrice));
             }
             result.close();
@@ -74,19 +85,20 @@ public class ProductDAO {
         return products;
     }
 
-    public Product searchUser(String parameterName, String parameter) {
-        String query = "SELECT * FROM productos WHERE " + parameterName + "=" + "'" + parameter + "'";
+    public Product searchProduct(String parameterName, String parameter) {
+       // String query = "SELECT * FROM " + SQL_PRODUCT_TABLE_NAME + " WHERE " + parameterName + "=" + "'" + parameter + "'";
+        String query = String.format("SELECT * FROM %s WHERE %s= %s", SQL_PRODUCT_TABLE_NAME, parameterName, parameter);
         Product response = null;
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                long productId = result.getLong("codigo_producto");
-                double purchaseVAT = result.getDouble("ivaventa");
-                long providerNit = result.getLong("nitproveedor");
-                String productName = result.getString("nombre_producto");
-                double purchasePrice = result.getDouble("precio_compra");
-                double salePrice = result.getDouble("precio_venta");
+                long productId = result.getLong(SQL_PRODUCT_ID);
+                double purchaseVAT = result.getDouble(SQL_PURCHASE_VAT);
+                long providerNit = result.getLong(SQL_PROVIDER_NIT);
+                String productName = result.getString(SQL_PRODUCT_NAME);
+                double purchasePrice = result.getDouble(SQL_PURCHASE_PRICE);
+                double salePrice = result.getDouble(SQL_SALE_PRICE);
                 response = new Product (productId, purchaseVAT, providerNit, productName, purchasePrice, salePrice);
             }
             result.close();
@@ -99,47 +111,50 @@ public class ProductDAO {
         return response;
 
     }
-    //Seguir desde aquí
 
-    public void updateUser(User user) {
-        String query = "UPDATE usuarios SET email_usuario=? , nombre_usuario=? , password=? , usuario=? WHERE cedula_usuario=?";
+    public void updateProduct(Product product) {
+        String query = String.format("UPDATE %s SET %s=?, %s=?, %s=?, %s=?, %s=? WHERE %s=?",
+                SQL_PRODUCT_TABLE_NAME, SQL_PURCHASE_VAT, SQL_PROVIDER_NIT, SQL_PRODUCT_NAME, SQL_PURCHASE_PRICE, SQL_SALE_PRICE, SQL_PRODUCT_ID);
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
-            statement.setString(1, user.getUserEmail());
-            statement.setString(2, user.getUserName());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getUser());
-            statement.setLong(5, user.getUserIdCard());
+            statement.setLong(1, product.getProductId());
+            statement.setDouble(2, product.getPurchaseVAT());
+            statement.setLong(3, product.getProviderNit());
+            statement.setString(4, product.getProductName());
+            statement.setDouble(5, product.getPurchasePrice());
+            statement.setDouble(6, product.getSalePrice());
             statement.execute();
             statement.close();
         } catch (SQLException e) {
-            System.out.println("Error con la base de datos actualizando al usuario");
+            System.out.println("Error con la base de datos actualizando al product");
             e.printStackTrace();
         }
     }
 
-    public void deleteUser(User user) {
-        String query = "DELETE FROM usuarios WHERE cedula_usuario=?";
+    public void deleteProduct(Product product) {
+        String query = String.format("DELETE FROM %s WHERE %s=?",
+                SQL_PRODUCT_TABLE_NAME, SQL_PRODUCT_ID);
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
-            statement.setLong(1, user.getUserIdCard());
+            statement.setLong(1, product.getProductId());
             statement.execute();
             statement.close();
         } catch (SQLException e) {
-            System.out.println("Error con la base de datos eliminando al usuario");
+            System.out.println("Error con la base de datos eliminando al producto");
             e.printStackTrace();
         }
     }
 
-    public void deleteUser(long userIdCard) {
-        String query = "DELETE FROM usuarios WHERE cedula_usuario=?";
+    public void deleteProduct(long productId) {
+        String query = String.format("DELETE FROM %s WHERE %s=?",
+                SQL_PRODUCT_TABLE_NAME, SQL_PRODUCT_ID);
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
-            statement.setLong(1, userIdCard);
+            statement.setLong(1, productId);
             statement.execute();
             statement.close();
         } catch (SQLException e) {
-            System.out.println("Error con la base de datos eliminando al usuario");
+            System.out.println("Error con la base de datos eliminando al producto");
             e.printStackTrace();
         }
     }

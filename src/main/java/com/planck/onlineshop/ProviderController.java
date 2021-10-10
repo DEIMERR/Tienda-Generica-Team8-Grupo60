@@ -25,7 +25,7 @@ public class ProviderController {
     // Read = GET
     @GetMapping(value = "{providerNit}")
     public Provider getProviderByNit(@PathVariable("providerNit") long providerNit) {
-        return providerDAO.searchProvider("providerNit", providerNit+"");
+        return providerDAO.searchProvider("nitproveedor", providerNit+"");
     }
 
     @PutMapping("/update")

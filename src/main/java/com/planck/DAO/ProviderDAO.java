@@ -9,7 +9,7 @@ public class ProviderDAO {
     Connection connection = new Connection();
 
     public void createProvider(long providerNit, String providerCity, String providerAddress, String providerName, String providerPhone) {
-        String query = "INSERT INTO providers (providerNit, providerCity, providerAddress, providerName, providerPhone) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO proveedores (nitproveedor, ciudad_proveedor, direccion_proveedor, nombre_proveedor, telefono_proveedor) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setLong(1, providerNit);
@@ -26,7 +26,7 @@ public class ProviderDAO {
     }
 
     public void createProvider(Provider provider) {
-        String query = "INSERT INTO providers (providerNit, providerCity, providerAddress, providerName, providerPhone) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO proveedores (nitproveedor, ciudad_proveedor, direccion_proveedor, nombre_proveedor, telefono_proveedor) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setLong(1, provider.getProviderNit());
@@ -46,14 +46,14 @@ public class ProviderDAO {
 
         ArrayList<Provider> providers = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.getConnection().prepareStatement("SELECT * FROM providers");
+            PreparedStatement statement = connection.getConnection().prepareStatement("SELECT * FROM proveedores");
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                long providerNit = result.getLong("providerNit");
-                String providerCity = result.getString("providerCity");
-                String providerAddress = result.getString("providerAddress");
-                String providerName = result.getString("providerName");
-                String providerPhone = result.getString("providerPhone");
+                long providerNit = result.getLong("nitproveedor");
+                String providerCity = result.getString("ciudad_proveedor");
+                String providerAddress = result.getString("direccion_proveedor");
+                String providerName = result.getString("nombre_proveedor");
+                String providerPhone = result.getString("telefono_proveedor");
                 providers.add(new Provider(providerNit, providerCity, providerAddress, providerName, providerPhone));
             }
             result.close();
@@ -67,17 +67,17 @@ public class ProviderDAO {
     }
 
     public Provider searchProvider(String parameterName, String parameter) {
-        String query = "SELECT * FROM providers WHERE " + parameterName + "=" + "'" + parameter + "'";
+        String query = "SELECT * FROM proveedores WHERE " + parameterName + "=" + "'" + parameter + "'";
         Provider response = null;
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                long providerNit = result.getLong("providerNit");
-                String providerCity = result.getString("providerCity");
-                String providerAddress = result.getString("providerAddress");
-                String providerName = result.getString("providerName");
-                String providerPhone = result.getString("providerPhone");
+                long providerNit = result.getLong("nitproveedor");
+                String providerCity = result.getString("ciudad_proveedor");
+                String providerAddress = result.getString("direccion_proveedor");
+                String providerName = result.getString("nombre_proveedor");
+                String providerPhone = result.getString("telefono_proveedor");
                 response = new Provider(providerNit, providerCity, providerAddress, providerName, providerPhone);
             }
             result.close();
@@ -92,7 +92,7 @@ public class ProviderDAO {
     }
 
     public void updateProvider(Provider provider) {
-        String query = "UPDATE providers SET providerCity=?, providerAddress=?, providerName=?, providerPhone=? WHERE providerNit=?";
+        String query = "UPDATE proveedores SET ciudad_proveedor=?, direccion_proveedor=?, nombre_proveedor=?, telefono_proveedor=? WHERE nitproveedor=?";
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setString(1, provider.getProviderCity());
@@ -109,7 +109,7 @@ public class ProviderDAO {
     }
 
     public void deleteProvider(Provider provider) {
-        String query = "DELETE FROM providers WHERE providerNit=?";
+        String query = "DELETE FROM proveedores WHERE nitproveedor=?";
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setLong(1, provider.getProviderNit());
@@ -122,7 +122,7 @@ public class ProviderDAO {
     }
 
     public void deleteProvider(long providerNit) {
-        String query = "DELETE FROM providers WHERE providerNit=?";
+        String query = "DELETE FROM proveedores WHERE nitproveedor=?";
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setLong(1, providerNit);

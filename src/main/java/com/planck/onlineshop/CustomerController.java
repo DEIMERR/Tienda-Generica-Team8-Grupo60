@@ -25,7 +25,7 @@ public class CustomerController {
     // Read = GET
     @GetMapping(value = "{customerIdCard}")
     public Customer getCustomerById(@PathVariable("customerIdCard") long customerIdCard) {
-        return customerDAO.searchCustomer("customerIdCard", customerIdCard+"");
+        return customerDAO.searchCustomer(CustomerDAO.SQL_CUSTOMER_ID_CARD, customerIdCard+"");
     }
 
     @PutMapping("/update")
