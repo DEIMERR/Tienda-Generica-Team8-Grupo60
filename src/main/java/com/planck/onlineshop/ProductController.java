@@ -1,8 +1,6 @@
 package com.planck.onlineshop;
 
-import com.planck.DAO.CustomerDAO;
 import com.planck.DAO.ProductDAO;
-import com.planck.Model.Customer;
 import com.planck.Model.Product;
 import org.springframework.web.bind.annotation.*;
 

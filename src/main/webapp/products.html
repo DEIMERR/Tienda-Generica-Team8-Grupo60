@@ -50,19 +50,19 @@
                         <input type="text" class="input" name="userIdCard" id="input1" placeholder="Código del Producto" required>
                     </div>
                     <div class="input-box">
-                        <input type="text" class="input" name="user" id="input4" placeholder="Nombre del Producto">
+                        <input type="text" class="input" name="user" id="input2" placeholder="Nombre del Producto">
                     </div>
                     <div class="input-box">
                         <input type="text" class="input" name="userEmail" id="input3" placeholder="NIT del Proveedor">
                     </div>
                     <div class="input-box">
-                        <input type="text" class="input" name="userName" id="input2" placeholder="IVA de Compra">
+                        <input type="text" class="input" name="userName" id="input4" placeholder="IVA de Compra">
                     </div>
                     <div class="input-box item5">
                         <input type="text" class="input" name="password" id="input5" placeholder="Precio de Compra">
                     </div>
                     <div class="input-box item5">
-                        <input type="text" class="input" name="password" id="input5" placeholder="Precio de Venta">
+                        <input type="text" class="input" name="password" id="input6" placeholder="Precio de Venta">
                     </div>
                 </div>
                 <div class="buttons">
@@ -84,18 +84,18 @@
         <div class="upload-label">
             <p>Puedes subir un archivo con los productos:</p>
             <div class="file-upload">
-                <input id="products-file" type="file">
+                <input id="products-file" type="file" accept=".csv">
                 <span class="material-icons-outlined"> file_upload </span>
                 <span id="upload-text"> Seleccionar archivo </span>
             </div>
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" id="upload-button">
             <span class="material-icons-outlined">check_circle</span>
             Cargar
             </button>
         </div>
          </div>
         <div class="table">
-            <table class="styled-table" id="user_table">
+            <table class="styled-table" id="product_table">
                 <thead class="table-head">
                     <tr>
                         <th>Código</th>
@@ -120,8 +120,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
-    <script src="scripts/users-table copy.js" ></script>
-    <script src="scripts/upload-file.js"></script>
+    <script src="scripts/products-table.js" ></script>
 
 </body>
 </html>

@@ -12,6 +12,7 @@
     overflow: overlay;
     max-height: 62vh;
     max-width: 100%;
+    width: unset !important;
 }
 
 table.dataTable {
