@@ -95,7 +95,7 @@ public class UserDAO {
         User userToCheck = searchUser("usuario", user);
         if (userToCheck != null){
             if (userToCheck.getPassword().equals(password)){
-                return "CorrectCredentials";
+                return userToCheck.getUserIdCard()+"";
             }
             else {
                 return "incorrectPassword";

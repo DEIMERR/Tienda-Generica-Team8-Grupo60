@@ -1,3 +1,14 @@
+sessionStorage.setItem("lastPage", window.location.href);
+checkSession()
+
+// Para revisar si ya se ha iniciado sesión
+function checkSession(){
+    //console.log(sessionStorage.getItem("session"))
+    if (sessionStorage.getItem("session") == null || sessionStorage.getItem("session") == "none"){
+        alert("Primero debes iniciar sesión")
+        window.location.href = "index.html";
+    }
+}
 var urlLink = "http://localhost:8080/users/" // Link para la conexión con el API rest
 
 var userTable = $("#user_table").DataTable( {

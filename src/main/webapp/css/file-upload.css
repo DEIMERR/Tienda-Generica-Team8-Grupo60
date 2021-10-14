@@ -13,7 +13,7 @@
     align-items: center;
     vertical-align: middle;
     border: none;
-    background-color: #0277bd;
+    background-color: #3d3d3d;
     border-radius: 0.3rem;
     transition: ease-out 0.3s;
 }
@@ -23,12 +23,12 @@
 }
 .upload-label .btn:hover {
     box-shadow: inset 10rem 0 0 0 #7202bd; 
-    background-color: #008ee0;
+    background-color: #3d3d3d;
     transition: 0.3s ease;
 }
 .upload-label .btn:active {
     background-color: black;
-    box-shadow: inset 0 0 0 0 #7202bd;
+    box-shadow: inset 0 0 0 0 #0501081f;
     transition: 0.05s ease;
 }
 
