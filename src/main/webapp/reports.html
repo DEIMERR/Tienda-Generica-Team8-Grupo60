@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proveedores - Tienda Genérica</title>
+    <title>Reportes - Tienda Genérica</title>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -15,8 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/modal.css">
-    
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="css/file-upload.css">
+
 </head>
 <body id="bootstrap-overrides">
     <nav class="navigation-bar">
@@ -30,45 +30,51 @@
         <li><a href="users.html">Usuarios</a></li>
         <li><a href="customers.html">Clientes</a></li>
         <li><a href="providers.html">Proveedores</a></li>
-        <li><a href="">Productos</a></li>
-        <li><a href="">Ventas</a></li>
+        <li><a href="products.html">Productos</a></li>
+        <li><a href="sales.html">Ventas</a></li>
         <li><a href="login.html">Reportes</a></li>
       </div>
     </nav>
-    <div class="banner">
-            <h3>¿Ver proyectos adicionales?</h3> 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#valeModal">
-                SÍ
+
+    <div class="table-and-body">
+        <div class="upload-label">
+            <p>Puedes subir un archivo con los productos:</p>
+            <div class="file-upload">
+                <input id="products-file" type="file" accept=".csv">
+                <span class="material-icons-outlined"> file_upload </span>
+                <span id="upload-text"> Seleccionar archivo </span>
+            </div>
+            <button class="btn btn-primary" id="upload-button">
+            <span class="material-icons-outlined">check_circle</span>
+            Cargar
             </button>
         </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="valeModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-title">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+        <div class="table">
+            <table class="styled-table" id="product_table">
+                <thead class="table-head">
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>NIT Proveedor</th>
+                        <th>IVA</th>
+                        <th>Precio Compra</th>
+                        <th>Precio Venta</th>
+                    </tr>
+                </thead>
+                <div class="styled-table__body">
+                    <tbody id="user_table_body">
+                    </tbody>
+                    
+                </div>
+            </table>
         </div>
-        <div class="modal-body">
-        <h4>Aquí puedes ver mis proyectos de parallax y galería de imágenes</h4>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-
+    
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
-    <script src="scripts/modal.js"></script>
+    <script src="scripts/reports.js" ></script>
+
 </body>
 </html>
