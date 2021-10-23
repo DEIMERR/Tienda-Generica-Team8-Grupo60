@@ -41,33 +41,57 @@
             <h2>Usuarios</h2>
             <p>Ingresa los datos de usuario</p>
             </div>
-            <form action="" class="form">
+           <form action="" class="form" id ="form"> 
                 <div class="input-labels">
+                
                     <div class="input-box">
-                        <input type="text" class="input" name="userIdCard" id="input1" placeholder="Cédula">
+                        <input type="number" class="input" name="userIdCard" id="input1" placeholder="Cédula"                        
+                        required
+                        title="Debe digitar la cedula a registrar, solo numeros" >
+                        <!-- <p class="formulario__input-error">El usuario tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.</p>
+                               -->                  
                     </div>
+                                       
+                    
                     <div class="input-box">
-                        <input type="text" class="input" name="userName" id="input2" placeholder="Nombre">
+                                              
+                        <input type="text" class="input" name="userName" id="input2" placeholder="Nombre"
+          			 	required pattern="[A-Za-z0-9\s]{4,40}"
+           				title="Letras y números. Tamaño mínimo: 4. Tamaño máximo: 40" >
+           				 <!--class="formulario__input-error">Letras y números. Tamaño mínimo: 5. Tamaño máximo: 40 -->  
+                         
+
                     </div>
+                    
+                    
+                    
                     <div class="input-box">
-                        <input type="text" class="input" name="userEmail" id="input3" placeholder="Email">
+                        <input type="email" class="input" name="userEmail" id="input3" placeholder="Email"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        required = "required"
+                        title="Ejemplo:   micorreo@correo.com">
                     </div>
+                    
                     <div class="input-box">
-                        <input type="text" class="input" name="user" id="input4" placeholder="Usuario">
+                        <input type="text" class="input" name="user" id="input4" placeholder="Usuario"
+                        required>
                     </div>
+                    
                     <div class="input-box item5">
-                        <input type="password" class="input" name="password" id="input5" placeholder="Contraseña">
+                        <input type="password" class="input" name="password" id="input5" placeholder="Contraseña"
+                        required>
                     </div>
+                    
                 </div>
                 <div class="buttons">
                     <div class="input-button">
                         <input type="button" class="button search-button" name="search" id="input6" value="Consultar">
                     </div>
                     <div class="input-button">
-                        <input type="button" class="button create-button" name="create" id="input7" value="Crear">
+                        <input type="submit" class="button create-button" name="create" id="input7" value="Crear">
                     </div>
                     <div class="input-button">
-                        <input type="button" class="button update-button" name="update" id="input8" value="Actualizar">
+                        <input type="submit" class="button update-button" name="update" id="input8" value="Actualizar">
                     </div>
                     <div class="input-button">
                         <input type="button" class="button delete-button" name="delete" id="input9" value="Borrar">
@@ -101,6 +125,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
     <script src="scripts/users-table.js" ></script>
+    <script src="scripts/formulario.js"></script>
 
 </body>
 </html>

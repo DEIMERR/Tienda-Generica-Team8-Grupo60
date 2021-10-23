@@ -151,7 +151,13 @@ table.dataTable>thead .sorting:after {
     align-items: center;
     padding: 2rem;
 }
-
+.table-and-body {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .page-item.active .page-link{
     background-color: #CC1D4B;
     border: 1px solid #CC1D4B;
@@ -259,4 +265,16 @@ color: black;
 
 .box .form .input-button input:active {
     background-color: rgb(37, 37, 43);
+}
+
+/* ----- -----  Estilos para Validacion ----- ----- */
+.box .form .input-box input.formulario__grupo-correcto:focus {
+    color: #19a825;
+    opacity: 1;
+}
+
+
+.box .form .input-box input.formulario__grupo-incorrecto {
+    border: 0.1rem solid #bb2929;
+    color: #d11e45;
 }

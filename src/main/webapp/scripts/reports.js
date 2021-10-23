@@ -2,12 +2,15 @@ let reportsTabeData = [];
 let reportsData = [];
 let reportsTable;
 let customerName;
+searchCustomer(123)
 
 $( document ).ready(function() {
+    
     $.when(getUsers().done(function(){
-        console.log(reportsData)
-        console.log(getDataTables(reportsData))
+        //console.log(reportsData);
+        getDataTables(reportsData) 
     }));
+ 
 });
 
 function getUsers(){
@@ -23,29 +26,31 @@ function getUsers(){
 
 function getDataTables(data) {
     const dataTables = new Map();
+    $(document).ajaxStop(function () {
     for (const row of data) {
-        const table = dataTables.get(row.userIdCard);
+        const table = dataTables.get(row.customerIdCard);
         if (table) {
             table.total += row.saleValue;
         } else {
-            dataTables.set(row.userIdCard, {
-                userIdCard: row.userIdCard,
-                userName: getName(row.userIdCard),
+            $.when(searchCustomer(row.customerIdCard).done(function(){
+                dataTables.set(row.customerIdCard, {
+                customerIdCard: row.customerIdCard,
+                customerName: customerName,
                 total: row.saleValue,
-            });
+                    });
+               }));
         }
     }
-    return Array.from(dataTables, ([key, val]) => val);
+        reportsTabeData = Array.from(dataTables, ([key, val]) => val);
+        if (reportsTabeData.length > 0) {
+            //console.log(reportsTabeData);
+            createTable(reportsTabeData)
+
+        }
+
+    });
     //return dataTables;    
 
-}
-
-function getName(customerIdCard){
-    let localName;
-    $.when(searchCustomer(customerIdCard).done(function(){
-        localName = customerName
-        return localName;
-    }));
 }
 
 function searchCustomer(customerIdCard){
@@ -60,21 +65,22 @@ function searchCustomer(customerIdCard){
     }).done(function(data){
        
         customerName = data.customerName;
-        console.log(customerName)
-        
-    })
+        //console.log(customerName + "aaaaaaaaaaaaaaaaaa")
+    });
 }
 
 function createTable(data){
-
-    var reportsTable = $("#user_table").DataTable( {
+    tableHead = document.querySelector(".table-head")
+    tableHead.innerHTML = ''
+    tableHead.insertAdjacentHTML('afterbegin',
+    '<tr> <th>Cédula</th> <th width="165">Nombre</th> <th>Valor Total Ventas</th> </tr>')
+    
+    var reportsTable = $("#product_table").DataTable( {
         data,
         columns: [
-            { data: 'userIdCard' },
-            { data: 'userEmail' },
-            { data: 'userName' },
-            { data: 'password' },
-            { data: 'user' }
+            { data: 'customerIdCard' },
+            { data: 'customerName' },
+            { data: 'total' }
         ],
         language: {
             "decimal":        "",
@@ -101,6 +107,15 @@ function createTable(data){
             }
         }
     });
+   
 }
     
-    
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 0,
+
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});

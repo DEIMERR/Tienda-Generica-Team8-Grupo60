@@ -73,16 +73,18 @@ $('form').on('click', '.search-button', function(){
 })
 
 //Crear un nuevo ususario
-$('form').on('click', '.create-button', function(){
+$('form').on('click', '.create-button', function(e){
   var newUser = getUserData();
-  $.ajax({
-    type: "POST",
-    url: urlLink + "create",
-    headers: {
+  if(document.getElementById('form').checkValidity()){
+
+    $.ajax({
+      type: "POST",
+      url: urlLink + "create",
+      headers: {
         'Accept': '*/*',
         'Content-Type': 'application/json'},
-    data: JSON.stringify(newUser),
-    dataType: 'json',
+        data: JSON.stringify(newUser),
+        dataType: 'json',
     success: function (data){
       userTable.ajax.reload(null, false);
       //console.log(data)
@@ -91,14 +93,16 @@ $('form').on('click', '.create-button', function(){
       console.log("Error en la petición" + error);
     }
   }).done(function(){
-      clearInputs();
-    }
+    clearInputs();
+  }
   )
+  }
 })
 
 //Actualizar un usuario
 $('form').on('click', '.update-button', function(){
   var newUser = getUserData();
+  if(document.getElementById('form').checkValidity()){
   $.ajax({
     type: "PUT",
     url: urlLink + "update",
@@ -119,6 +123,7 @@ $('form').on('click', '.update-button', function(){
       clearInputs();
     }
   )
+}
 })
 
 //Eliminar Usuario

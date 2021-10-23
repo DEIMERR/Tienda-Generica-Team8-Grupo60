@@ -3,7 +3,7 @@ package com.planck.DAO;
 import java.sql.*;
 
 public class Connection {
-    String database = "tiendagrupo60";
+    String database = "tiendagrupo60_5";
     String user = "root";
     String password = "admin123";
     String port = "3306";
