@@ -9,7 +9,7 @@ public class Connection {
     String port = "3306";
     //String url = "localhost";
     String url = "tiendagrupo60.c47knbsonjdi.us-east-2.rds.amazonaws.com";
-    String jdbcUrl = "jdbc:mysql://" + url+ ":" + port + "/" + database + "?user=" + user + "&password=" + password;
+    String jdbcUrl = "jdbc:mysql://" + url+ ":" + port + "/" + database + "?user=" + user + "&password=" + password + "&useUnicode=true&characterEncoding=UTF-8";
 
     java.sql.Connection connection = null;
 
