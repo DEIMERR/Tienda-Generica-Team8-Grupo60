@@ -137,8 +137,10 @@ $('.sale-footer').on('click', '.comfirm-button', function(){
         saleIdLabel.innerHTML = saleId;
         getSaleData();
 
-        $.when(createSale().then(function(results){
+        $.when(createSale().done(function(){
+          
           createSaleDetails();
+          
         }))
 
       }));
@@ -230,7 +232,7 @@ function sumProductsValue(){
 
 // función para crear la venta completa.
 function getSaleData(){
-  getSaleId();
+
   sale.customerIdCard = customerData.customerIdCard;
   sale.saleId = saleId;
   sale.saleTotal = saleTotal;
@@ -263,7 +265,7 @@ function createSale(){
     data: JSON.stringify(sale),
     dataType: 'json',
     success: function (data){
-      alert("¡La venta se realizó exitosamente!\n(　＾∇＾)/")
+     
       //console.log(data)
     },
     error: function(error){
@@ -282,6 +284,7 @@ function createSaleDetails(){
     createSaleDetail();
     saleDetailId += 1
   }
+  alert("¡La venta se realizó exitosamente!\n(　＾∇＾)/")
     }))
 }
 
@@ -296,7 +299,7 @@ function createSaleDetail(){
     data: JSON.stringify(saleDetail),
     dataType: 'json',
     success: function (data){
-      //console.log(data)
+     // console.log(data)
     },
     error: function(error){
       console.log("Error en la petición" + error);
